@@ -123,9 +123,26 @@ Capybara = {
   },
 
   selectOption: function(index) {
-    this.nodes[index].selected = true;
-    this.nodes[index].setAttribute("selected", "selected");
+    var element = this.nodes[index];
+    var select = element.parentNode;
+    var childIndex = null;
+    for ( var i = 0; i < select.options.length; i++ ) if ( select.options[ i ] == element ) childIndex = i;
+    select.selectedIndex = childIndex;
+    // this.nodes[index].selected = true;
+    // this.nodes[index].setAttribute("selected", "selected");
     this.trigger(index, "change");
+  },
+
+  selected: function(index) {
+    var element = this.nodex[index];
+    var select = element.parentNode;
+    var option = null;
+    for ( var i = 0; i < select.options.length; i++ ) if ( select.options[ i ] == element ) option = select.options[i];
+    return option.selected
+  }
+
+  selectedIndex: function(index) {
+    return this.nodes[index].selectedIndex;
   },
 
   unselectOption: function(index) {

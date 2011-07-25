@@ -57,10 +57,14 @@ class Capybara::Driver::Webkit
       self['checked']
     end
 
+    def selected?
+      invoke("selected") == "true"
+    end
+
     def disabled?
       self['disabled']
     end
-    
+
     def path
       raise Capybara::NotSupportedByDriverError
     end
